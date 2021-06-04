@@ -28,6 +28,14 @@ function App() {
         }
     ])
 
+    // Add task
+    const addTask = (task) => {
+        console.log(task);
+        const id = Math.floor(Math.random() * 1000) + 1;
+        const newTask = {id, ...task}
+        setTask([...tasks, newTask]);
+    }
+
     // Delete Task
     const deleteTask = (id) => {
         setTask(tasks.filter((task) => task.id !== id));
@@ -42,7 +50,7 @@ function App() {
     return (
         <div className="container">
             <Header title={'Task Tracker'}/>
-            <AddTask />
+            <AddTask onAdd={addTask} />
             {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleRemainder}/> :
                 <p>No task</p>}
         </div>
