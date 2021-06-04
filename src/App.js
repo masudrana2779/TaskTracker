@@ -2,6 +2,7 @@ import {useState} from "react";
 import './App.css';
 import Header from "./component/heaeder/Header";
 import Tasks from "./component/tasks";
+import AddTask from "./component/addTask";
 
 
 function App() {
@@ -28,16 +29,22 @@ function App() {
     ])
 
     // Delete Task
-
     const deleteTask = (id) => {
-        console.log('delete', id);
-        setTask(tasks.filter( (task) => task.id !== id ));
+        setTask(tasks.filter((task) => task.id !== id));
+    }
+
+    // Toggle Remainder
+    const toggleRemainder = (id) => {
+        console.log(id, 'toggle');
+        setTask(tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task));
     }
 
     return (
         <div className="container">
             <Header title={'Task Tracker'}/>
-            <Tasks tasks={tasks} onDelete={deleteTask} />
+            <AddTask />
+            {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleRemainder}/> :
+                <p>No task</p>}
         </div>
     );
 }
