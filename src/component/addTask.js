@@ -14,6 +14,7 @@ const AddTask = ({onAdd}) => {
             return;
         }
         onAdd({text, day, remainder});
+        console.log(text,day,remainder)
 
         setText('');
         setDay('');

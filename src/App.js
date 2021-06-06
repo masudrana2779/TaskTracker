@@ -44,7 +44,7 @@ function App() {
     // Toggle Remainder
     const toggleRemainder = (id) => {
         console.log(id, 'toggle');
-        setTask(tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task));
+        setTask(tasks.map((task) => task.id === id ? {...task, remainder: !task.remainder} : task));
     }
 
     return (
