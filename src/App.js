@@ -6,6 +6,7 @@ import AddTask from "./component/addTask";
 
 
 function App() {
+    const [showAddTask, setShowAddTask] = useState(false);
 
     const [tasks, setTask] = useState([
         {
@@ -30,7 +31,6 @@ function App() {
 
     // Add task
     const addTask = (task) => {
-        console.log(task);
         const id = Math.floor(Math.random() * 1000) + 1;
         const newTask = {id, ...task}
         setTask([...tasks, newTask]);
@@ -43,14 +43,13 @@ function App() {
 
     // Toggle Remainder
     const toggleRemainder = (id) => {
-        console.log(id, 'toggle');
         setTask(tasks.map((task) => task.id === id ? {...task, remainder: !task.remainder} : task));
     }
 
     return (
         <div className="container">
-            <Header title={'Task Tracker'}/>
-            <AddTask onAdd={addTask} />
+            <Header title={'Task Tracker'} onAdd={()=>setShowAddTask(!showAddTask)} showAdd={showAddTask} />
+            {showAddTask && <AddTask onAdd={addTask}/>}
             {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleRemainder}/> :
                 <p>No task</p>}
         </div>
