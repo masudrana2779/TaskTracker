@@ -3,10 +3,12 @@ import './App.css';
 import Header from "./component/heaeder/Header";
 import Tasks from "./component/tasks";
 import AddTask from "./component/addTask";
+import UpdateTask from "./component/editTask";
 
 
 function App() {
     const [showAddTask, setShowAddTask] = useState(false);
+    const [showUpdateTask, setShowUpdatedTask] = useState(false);
 
     const [tasks, setTask] = useState([])
 
@@ -58,6 +60,11 @@ function App() {
         })
         setTask(tasks.filter((task) => task.id !== id));
     }
+    // Edit Task
+    const editTask = async (id) => {
+        console.log(2121)
+        setShowUpdatedTask(!showAddTask)
+    }
 
     // Toggle Remainder
     const toggleRemainder = async (id) => {
@@ -81,7 +88,8 @@ function App() {
         <div className="container">
             <Header title={'Task Tracker'} onAdd={() => setShowAddTask(!showAddTask)} showAdd={showAddTask}/>
             {showAddTask && <AddTask onAdd={addTask}/>}
-            {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleRemainder}/> :
+            {showUpdateTask && <UpdateTask onAdd={addTask}/>}
+            {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleRemainder} onEdit={() => setShowUpdatedTask(!showUpdateTask)}/> :
                 <p>No task</p>}
         </div>
     );

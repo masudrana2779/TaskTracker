@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const AddTask = ({onAdd}) => {
+const UpdateTask = ({onAdd}) => {
     const [text, setText] = useState('');
     const [day, setDay] = useState('');
     const [remainder, setRemainder] = useState(true);
@@ -24,7 +24,7 @@ const AddTask = ({onAdd}) => {
     return (
         <form className={'add-form'} onSubmit={onSubmit}>
             <div className="form-control">
-                <label>Task</label>
+                <label>Update Task</label>
                 <input type="text" placeholder={'Add Task'} value={text} onChange={(e) => setText(e.target.value)}/>
             </div>
             <div className="form-control">
@@ -40,4 +40,4 @@ const AddTask = ({onAdd}) => {
     )
 }
 
-export default AddTask;
+export default UpdateTask;
